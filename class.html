@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			isActive {
+			  color: red;
+			  background: blue;
+			}
+			hasError {
+        color: skyblue;
+        background: purple;			  
+			}
+		</style>
+		<script src="https://unpkg.com/vue"></script>
+	</head>
+	<body>
+	  <div id="app">
+	  	<p v-bind:class="{ active: isActive, 'text-danger': hasError }">骄傲的我们</p>
+	  	<div v-bind:class="classObject">我是你无奈的选择</div>
+	  </div>
+	</body>
+  	 <script type="text/javascript">
+  	 	var vm = new Vue({
+  	 	  el:'#app',
+  	 	  data:{
+  	 	    isActive: true,
+  	 	    hasError: false,
+  	 	    classObject:{
+  	 	      active: true,
+            'text-danger': false
+  	 	    }
+  	 	  }
+  	 	})
+  	 </script>
+</html>

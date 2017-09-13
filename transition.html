@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			.fade-enter-active, .fade-leave-active {
+        transition: opacity .5s
+      }
+      .fade-enter, .fade-leave-to /* .fade-leave-active in below version 2.1.8 */ {
+        opacity: 0
+      }
+		</style>
+		<script src="https://unpkg.com/vue"></script>
+	</head>
+	<body>
+	  <div id="app">
+	  	<button @click="show = !show">点击</button>
+	  	<transition name = 'fade'>
+	  	  <p v-if = 'show'>我想我可以</p>
+	  	</transition>
+	  </div>
+	</body>
+	<script type="text/javascript">
+		var vm = new Vue({
+		  el: "#app",
+		  data: {
+		    show: true
+		  }
+		})
+	</script>
+</html>

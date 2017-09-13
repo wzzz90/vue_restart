@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+    <script src="https://unpkg.com/vue"></script>
+	</head>
+	<body>
+	  <!--对象的渲染-->
+	  <div id="app">
+	  	<ul>
+	  		<li v-for='(value, key ,index) in items' :key="index">
+	  		 {{ index }} {{ key }} : {{ value }}
+	  		</li>
+	  	</ul>
+	  	<ol>
+	  	  <li v-for='value in userProfile'>
+	  	    {{ value }}
+	  	  </li>
+	  	</ol>
+	  </div>
+	</body>
+	<script type="text/javascript">
+		var vm = new Vue({
+		  el: "#app",
+		  
+		  data: {
+		    
+        userProfile: {
+          name: 'Anika'
+        },
+		    items: {
+		      name: "jonm",
+		      age: "19",
+		      sex: "male",
+		      action: "谈恋爱"
+		    }
+		  }
+		 
+		})
+		//添加一条属性
+		Vue.set(vm.userProfile, 'age', 27)
+		//添加多条属性
+		vm.userProfile = Object.assign({}, vm.userProfile, {
+      age: 279,
+      favoriteColor: 'Vue Green'
+    }) 
+	</script>
+</html>

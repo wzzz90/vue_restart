@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+    <script src="https://unpkg.com/vue"></script>
+	</head>
+	<body>
+	  <div id="app">
+	  	<input v-model='parendMsg'>
+	  	<br>
+	  	<Child :my-message='parendMsg'>
+	  </div>
+	</body>
+	<script type="text/javascript">
+	  //要让子组件使用父组件的数据，我们需要通过子组件的 props 选项。
+	  //子组件要显式地用 props 选项声明它期待获得的数据
+    //在模板中，要动态地绑定父组件的数据到子模板的 props，与绑定到任何普通的 HTML 特性相类似，
+    //就是用 v-bind。每当父组件的数据变化时，该变化也会传导给子组件
+    //在props中烤肉串语法命名的名字需要用驼峰命名法
+		Vue.component('Child', {
+		  props: ['myMessage'],
+		  template: '<span>{{ myMessage }}</span>'
+		})
+		var vm = new Vue({
+		  el: '#app',
+		  data: {
+		    parendMsg: '父元素'
+		  }
+		})
+		
+		//不能使用字面量语法传递数值
+		//<!-- 传递了一个字符串 "1" -->
+    //<comp some-prop="1"></comp>
+    //因为它是一个字面 prop，它的值是字符串 "1" 而不是 number。
+    //如果想传递一个实际的 number，需要使用 v-bind，从而让它的值被当作 JavaScript 表达式计算：
+    //<!-- 传递实际的 number -->
+    //<comp v-bind:some-prop="1"></comp>
+    
+    
+    
+	</script>
+</html>

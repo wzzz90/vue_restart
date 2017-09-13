@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://unpkg.com/vue"></script>
+	</head>
+	<body>
+	  <div id="app">
+	  	<ul>
+	  		<li v-for='n in evenNumbers'>
+	  		  {{ n }}
+	  		</li>
+	  	</ul>
+      <ul>
+        <li v-for='n in even(numbers)'>
+          {{ n }}
+        </li>
+      </ul>
+       <!-- 一段范围的渲染-->
+      <ul>
+      	<li v-for='n in 10'>
+      	  {{ n }}
+      	</li>
+      </ul>
+	  </div>
+	</body>
+	<script type="text/javascript">
+		var vm = new Vue({
+		  el: "#app",
+		  data: {
+		    numbers: [1, 2, 3, 4, 5, 6]
+		  },
+		  methods: {
+		    even: function (numbers) {
+		      return numbers.filter(function (number) {
+		        return number % 2 == 0 
+		      })
+		    }
+		  },
+		  computed: {
+		    evenNumbers : function () {
+		      return this.numbers.filter(function(number) {
+		        return number % 2 == 0 
+		      })
+		    }
+		  }
+		})
+	</script>
+</html>

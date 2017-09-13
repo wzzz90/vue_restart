@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://unpkg.com/vue"></script>
+	</head>
+	<body>
+	  <div id="watch-example">
+      <p>
+                    输入问题:
+        <input v-model="question">
+      </p>
+      <p>{{ answer }}</p>
+    </div>
+	</body>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+    <script>
+    var watchExampleVM = new Vue({
+      el: '#watch-example',
+      data: {
+        question: '',
+        answer: '请输入内容'
+      },
+      watch: {
+        // 如果 question 发生改变，这个函数就会运行
+        question: function (newQuestion) {
+          this.answer = '正在搜索答案'
+          this.getAnswer()
+        }
+      },
+      methods: {
+        // _.debounce 是一个通过 lodash 限制操作频率的函数。
+        // 在这个例子中，我们希望限制访问 yesno.wtf/api 的频率
+        // ajax 请求直到用户输入完毕才会发出
+        // 学习更多关于 _.debounce function (and its cousin
+        // _.throttle), 参考: https://lodash.com/docs#debounce
+        getAnswer: _.debounce(
+          function () {
+            //是否含有问号
+            if (this.question.indexOf('?') === -1 && this.question.indexOf('？') === -1) {
+              this.answer = '请输入问号'
+              return
+            }
+            this.answer = '搜索中'
+            var that = this
+            axios.get('https://yesno.wtf/api')
+              .then(function (response) {
+                that.answer = _.capitalize(response.data.answer)
+                //_.capitalize 首字母大写
+              })
+              .catch(function (error) {
+                that.answer = '找不到结果' + error
+              })
+          },
+          // 这是我们为用户停止输入等待的毫秒数
+          500
+        )
+      }
+    })
+    </script>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	  <script src="https://unpkg.com/vue"></script>
+	</head>
+	<body>
+	  <div id="app">
+	  	<button @click="add">点击</button>
+	  	<p>{{ counter }}</p>
+	  	<button @click="say('hi')">say hi</button>
+	  	<button @click="say('hello')">say hello</button>
+	  	<button @click="warn($event)">原生对象</button>
+	  </div>
+	</body>
+	<script type="text/javascript">
+		var vm = new Vue({
+		  el: "#app",
+		  data: {
+		    counter: 0
+		  },
+		  methods: {
+		    add : function (event) {
+		      this.counter += 1;
+		      console.log(event.target)
+		    },
+		    say: function (msg) {
+		      alert(msg)
+		    },
+		    warn :function (event) {
+		      console.log(event)
+		      console.log(event.target)
+		    }
+		  }
+		})
+	</script>
+</html>
